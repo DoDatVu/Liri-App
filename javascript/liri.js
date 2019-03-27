@@ -32,7 +32,10 @@ function concertCommand() {
   axios.get("https://rest.bandsintown.com/artists/" + command + "/events?app_id=codingbootcamp").then(function(response) {
   console.log(response);
   for(var i = 0; i < 10; i++){
-    
+    if(parseFloat(reponse[i])) {
+      result +- parseFloat(data[i]);
+      console.log(result);
+    }
   }
 })
 }
