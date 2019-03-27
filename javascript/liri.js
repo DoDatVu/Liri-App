@@ -29,9 +29,11 @@ switch (command) {
 
 function concertCommand() {
   console.log("concert");
-  axios.get("https://rest.bandsintown.com/artists/" + Command + "/events?app_id=codingbootcamp").then(function(response){
+  axios.get("https://rest.bandsintown.com/artists/" + command + "/events?app_id=codingbootcamp").then(function(response) {
   console.log(response);
+})
 }
+
 
 // function spotifyCommand() {
 //   console.log("spotify");
@@ -56,4 +58,4 @@ function concertCommand() {
   // console.log("Venue Location: ")
   // console.log("Dat of the Event: ")
 
-})
+// })
