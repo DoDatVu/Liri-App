@@ -31,6 +31,9 @@ function concertCommand() {
   console.log("concert");
   axios.get("https://rest.bandsintown.com/artists/" + command + "/events?app_id=codingbootcamp").then(function(response) {
   console.log(response);
+  for(var i = 0; i < 10; i++){
+    
+  }
 })
 }
 
