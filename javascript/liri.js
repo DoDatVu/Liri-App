@@ -1,7 +1,7 @@
 
 require("dotenv").config();
 var command = process.argv[2];
-var extra = process.argv.slice(3);
+var extra = process.argv.slice(3).join("+");
 var axios = require("axios");
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
@@ -14,7 +14,6 @@ var spotify = new Spotify(keys.spotify);
 // }
 
 console.log(extra);
-console.log(process.argv)
 
 
 // switch (command) {
