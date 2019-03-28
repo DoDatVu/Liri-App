@@ -9,12 +9,9 @@ var spotify = new Spotify(keys.spotify);
 
 
 
-// if (command === "concert-this"){
-//   concertCommand();
-// }
-
-console.log(extra);
-
+if (command === "concert-this"){
+  concertCommand();
+}
 
 // switch (command) {
 //   case "concert-this":
@@ -38,8 +35,11 @@ function concertCommand() {
   console.log("concert");
   axios.get("https://rest.bandsintown.com/artists/" + extra + "/events?app_id=codingbootcamp").then(function(response) {
   console.log(response);
-  for(var i = 0; i < 10; i++){
-    }
+//   for(var i = 0; i < extra.length; i++){
+//     if (i > 10 && < extra.length{
+      
+//     })
+//     }
   })
 }
 
