@@ -1,7 +1,7 @@
 
 require("dotenv").config();
 var command = process.argv[2];
-var Command = process.argv[3];
+var extra = process.argv.slice(3);
 var axios = require("axios");
 var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
@@ -9,35 +9,39 @@ var spotify = new Spotify(keys.spotify);
 
 
 
-switch (command) {
-  case "concert-this":
-    concertCommand();
-    break;
+// if (command === "concert-this"){
+//   concertCommand();
+// }
 
-  case "dspotify-this-song":
-    spotifyCommand();
-    break;
+console.log(extra);
+console.log(process.argv)
 
-  case "movie-this":
-    movieCommand();
-    break;
 
-  case "do-what-it-says":
-    sayCommand();
-    break;
-}
+// switch (command) {
+//   case "concert-this":
+//     concertCommand();
+//     break;
+
+//   case "dspotify-this-song":
+//     spotifyCommand();
+//     break;
+
+//   case "movie-this":
+//     movieCommand();
+//     break;
+
+//   case "do-what-it-says":
+//     sayCommand();
+//     break;
+// }
 
 function concertCommand() {
   console.log("concert");
-  axios.get("https://rest.bandsintown.com/artists/" + command + "/events?app_id=codingbootcamp").then(function(response) {
+  axios.get("https://rest.bandsintown.com/artists/" + extra + "/events?app_id=codingbootcamp").then(function(response) {
   console.log(response);
   for(var i = 0; i < 10; i++){
-    if(parseFloat(reponse[i])) {
-      result +- parseFloat(data[i]);
-      console.log(result);
     }
-  }
-})
+  })
 }
 
 
