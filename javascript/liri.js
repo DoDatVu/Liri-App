@@ -12,15 +12,9 @@ if (command === "concert-this") {
   concertCommand();
 }
 
-// switch (command) {
-//   case "concert-this":
-//     concertCommand();
-//     break;
-
-//   case "dspotify-this-song":
-//     spotifyCommand();
-//     break;
-
+if (command === "dspotify-this-song")
+  concertCommand();
+   
 //   case "movie-this":
 //     movieCommand();
 //     break;
@@ -41,13 +35,17 @@ function concertCommand() {
   })
 }
 
+function spotifyCommand() {
+  spotify
+  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
+  .then(function(data) {
+    console.log(data); 
+  })
+  .catch(function(err) {
+    console.error('Error occurred: ' + err); 
+  });
+}
 
-
-// function spotifyCommand() {
-//   console.log("spotify");
-//   axios.get("https://rest.bandsintown.com/artists/" + Command + "/events?app_id=codingbootcamp").then(function(response){
-//   console.log(response);
-// }
 
 // function movieCommand() {
 //   console.log("movie");
