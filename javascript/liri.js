@@ -6,26 +6,28 @@ var keys = require("./keys.js");
 var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 var time = require("moment")
+var fs = require("fs");
 
+function randomBot() {
+  if (command === "concert-this") {
+    concertCommand();
+  }
+  if (command === "spotify-this-song") {
+    spotifyCommand();
+  }
 
-if (command === "concert-this") {
-  concertCommand();
+  if (command === "movie-this") {
+    movieCommand();
+  }
+
+  if (command === "do-what-it-says") {
+    sayCommand();
+  }
 }
 
-if (command === "dspotify-this-song")
-  concertCommand();
-   
-//   case "movie-this":
-//     movieCommand();
-//     break;
-
-//   case "do-what-it-says":
-//     sayCommand();
-//     break;
-// }
+randomBot()
 
 function concertCommand() {
-  console.log("concert");
   axios.get("https://rest.bandsintown.com/artists/" + extra + "/events?app_id=codingbootcamp").then(function (response) {
     for (var i = 10; i < response.data.length; i++) {
       console.log(response.data[i].venue.name);
@@ -36,32 +38,47 @@ function concertCommand() {
 }
 
 function spotifyCommand() {
-  spotify
-  .request('https://api.spotify.com/v1/tracks/7yCPwWs66K8Ba5lFuU2bcx')
-  .then(function(data) {
-    console.log(data); 
-  })
-  .catch(function(err) {
-    console.error('Error occurred: ' + err); 
+  spotify.search({
+    type: 'track',
+    query: extra
+  }, function (err, data) {
+      for (var i = 0; i < data.tracks.items.length; i++) {
+        console.log(data.tracks.items[i].artists[0].name);
+        console.log(data.tracks.items[i].name);
+        console.log(data.tracks.items[i].preview_url);
+        console.log(data.tracks.items[i].album.name);
+      }
+    });
+}
+
+function movieCommand() {
+  axios.get("https://www.omdbapi.com/?t=" + extra + "&y=&plot=short&apikey=8c938da9").then(function (response) {
+    console.log(response.data.Title);
+    console.log(response.data.Year);
+    console.log(response.data.imdbRating);
+    console.log(response.data.Ratings[1].Source + " : " + response.data.Ratings[1].Value);
+    console.log(response.data.Country);
+    console.log(response.data.Language);
+    console.log(response.data.Plot);
+    console.log(response.data.Actors);
   });
 }
 
+function sayCommand() {
+  fs.readFile("random.txt", "utf8", function (error, data) {
+    if (error) {
+      return console.log(error);
+    }
+    console.log(data);
 
-// function movieCommand() {
-//   console.log("movie");
-//   axios.get("https://rest.bandsintown.com/artists/" + Command + "/events?app_id=codingbootcamp").then(function(response){
-//   console.log(response);
-// }
+    var dataArr = data.split(",");
 
-// function sayCommand() {
-//   console.log("say");
-//   axios.get("https://rest.bandsintown.com/artists/" + Command + "/events?app_id=codingbootcamp").then(function(response){
-//   console.log(response);
-// }
+    console.log(dataArr);
 
+    command = dataArr[0]
+    extra = dataArr[1]
 
-// console.log("The name of venue: ")
-// console.log("Venue Location: ")
-// console.log("Dat of the Event: ")
+    randomBot()
 
-// })
+  })
+}
